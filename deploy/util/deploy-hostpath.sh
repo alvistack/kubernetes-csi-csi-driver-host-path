@@ -208,6 +208,7 @@ resources:
 EOF
 
     run kubectl apply --kustomize "${TEMP_DIR}"
+    cat "${TEMP_DIR}"/* >> /tmp/csi-driver-host-path.yml
 done
 
 # deploy hostpath plugin and registrar sidecar
@@ -253,6 +254,7 @@ for i in $(ls ${BASE_DIR}/hostpath/*.yaml | sort); do
         fi
         echo "$line"
     done)"
+    echo "$modified" >> /tmp/csi-driver-host-path.yml
     if ! echo "$modified" | kubectl apply -f -; then
         echo "modified version of $i:"
         echo "$modified"
