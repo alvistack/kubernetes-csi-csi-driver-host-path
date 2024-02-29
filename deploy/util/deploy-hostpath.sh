@@ -29,6 +29,7 @@ BASE_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 TEMP_DIR="$( mktemp -d )"
 trap 'rm -rf ${TEMP_DIR}' EXIT
+rm -rf /vagrant/csi-driver-host-path.yml
 
 # KUBELET_DATA_DIR can be set to replace the default /var/lib/kubelet.
 # All nodes must use the same directory.
@@ -114,7 +115,7 @@ function rbac_version () {
 }
 
 # version_gt returns true if arg1 is greater than arg2.
-# 
+#
 # This function expects versions to be one of the following formats:
 #   X.Y.Z, release-X.Y.Z, vX.Y.Z
 #
@@ -132,11 +133,11 @@ function rbac_version () {
 # version_gt 1.3.1 v1.2.0  (returns true)
 # version_gt 1.1.1 release-1.2.0  (returns false)
 # version_gt 1.2.0 1.2.2  (returns false)
-function version_gt() { 
+function version_gt() {
     versions=$(for ver in "$@"; do ver=${ver#release-}; ver=${ver#kubernetes-}; echo ${ver#v}; done)
-    greaterVersion=${1#"release-"};  
+    greaterVersion=${1#"release-"};
     greaterVersion=${greaterVersion#"kubernetes-"};
-    greaterVersion=${greaterVersion#"v"}; 
+    greaterVersion=${greaterVersion#"v"};
     test "$(printf '%s' "$versions" | sort -V | head -n 1)" != "$greaterVersion"
 }
 
@@ -226,6 +227,7 @@ resources:
 EOF
 
     run kubectl apply --kustomize "${TEMP_DIR}"
+    cat "${TEMP_DIR}"/* >> /vagrant/csi-driver-host-path.yml
 done
 
 # deploy snapshot-metadata service components
@@ -300,6 +302,7 @@ for i in $(ls ${BASE_DIR}/hostpath/*.yaml | sort); do
         fi
         echo "$line"
     done)"
+    echo "$modified" >> /vagrant/csi-driver-host-path.yml
     if ! echo "$modified" | kubectl apply -f -; then
         echo "modified version of $i:"
         echo "$modified"
