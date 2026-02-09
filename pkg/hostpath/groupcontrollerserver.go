@@ -83,6 +83,8 @@ func (hp *hostPath) CreateVolumeGroupSnapshot(ctx context.Context, req *csi.Crea
 
 			snapshots[i] = &csi.Snapshot{
 				SizeBytes:       snapshot.SizeBytes,
+				SnapshotId:      snapshot.Id,
+				SourceVolumeId:  snapshot.VolID,
 				CreationTime:    snapshot.CreationTime,
 				ReadyToUse:      snapshot.ReadyToUse,
 				GroupSnapshotId: snapshot.GroupSnapshotID,
