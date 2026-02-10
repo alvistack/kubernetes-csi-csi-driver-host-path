@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   csi-hostpathplugin:
   - apiVersion: v2
+    appVersion: v1.17.1
+    created: "2026-02-10T12:26:25.995148224Z"
+    description: A Helm chart for deploy the CSI Hostpath driver
+    digest: b8af94d1a151cb0385e5afca7bb80b01586adef2feccd4a2544f345f4841c8b9
+    name: csi-hostpathplugin
+    type: application
+    urls:
+    - https://github.com/alvistack/kubernetes-csi-csi-driver-host-path/releases/download/csi-hostpathplugin-v1.17.1/csi-hostpathplugin-v1.17.1.tgz
+    version: v1.17.1
+  - apiVersion: v2
     appVersion: v1.17.0
     created: "2025-06-24T06:31:50.402890317Z"
     description: A Helm chart for deploy the CSI Hostpath driver
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/alvistack/kubernetes-csi-csi-driver-host-path/releases/download/csi-hostpathplugin-v1.16.1/csi-hostpathplugin-v1.16.1.tgz
     version: v1.16.1
-generated: "2025-06-24T06:31:50.4029022Z"
+generated: "2026-02-10T12:26:25.995163723Z"
