@@ -1,3 +1,22 @@
+# Release notes for v1.17.1
+
+## Changes by Kind
+
+### Bug or Regression
+
+- Fixed CreateVolumeGroupSnapshot to return complete responses on repeated calls. ([#628](https://github.com/kubernetes-csi/csi-driver-host-path/pull/628), [@jsafrane](https://github.com/jsafrane))
+
+## Dependencies
+
+### Added
+_Nothing has changed._
+
+### Changed
+_Nothing has changed._
+
+### Removed
+_Nothing has changed._
+
 # Release notes for v1.17.0
 
 # Changelog since v1.17.0
